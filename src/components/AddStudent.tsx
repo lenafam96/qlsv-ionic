@@ -4,9 +4,11 @@ import { useState } from "react";
 import { Student } from "../models/Student";
 import { StudentArray } from "../models/StudentArray";
 
-interface ContainerProps {}
+interface ContainerProps {
+  count: number;
+}
 
-const ExploreContainer: React.FC<ContainerProps> = () => {
+const AddStudent: React.FC<ContainerProps> = () => {
   const history = useHistory();
 
   const [id, setId] = useState("");
@@ -22,7 +24,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     StudentArray.push(st);
     // console.log(id, name, address, avatar, score);
     console.log(StudentArray[0]);
-    
+
     history.push("/home");
   };
 
@@ -108,4 +110,4 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-export default ExploreContainer;
+export default AddStudent;
