@@ -1,4 +1,4 @@
 import { Student } from "./Student";
 
-let StudentArray: Student[];
+const  StudentArray: Student[] = [];
 export { StudentArray };

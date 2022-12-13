@@ -19,8 +19,10 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     const st = new Student(id, name, address, avatar, Number(score));
     console.log(StudentArray);
 
-    // StudentArray.push(st);
-    console.log(id, name, address, avatar, score);
+    StudentArray.push(st);
+    // console.log(id, name, address, avatar, score);
+    console.log(StudentArray[0]);
+    
     history.push("/home");
   };
 

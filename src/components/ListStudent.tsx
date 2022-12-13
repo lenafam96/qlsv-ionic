@@ -1,9 +1,11 @@
 import "./ListStudent.css";
 import { Link } from "react-router-dom";
-
+import { StudentArray } from "../models/StudentArray";
 interface ContainerProps {}
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
+  console.log(StudentArray.length);
+  
   return (
     <div className="container">
       <Link to="add">
@@ -20,18 +22,21 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </tr>
         </thead>
         <tbody>
+        {StudentArray.map((item) => (
           <tr>
-            <td>1</td>
-            <td>Phan Thanh Hải</td>
-            <td>Thái Bình</td>
+            <td>{item.getId()}</td>
+            <td>{item.getName()}</td>
+            <td>{item.getAddress()}</td>
             <td id="avatar">
               <img
-                src="blob:http://localhost:8100/6223297f-6080-454c-a21c-563252e78f1c"
+                src={item.getAvatar()}
                 alt=""
               />
             </td>
-            <td>10</td>
-          </tr>
+            <td>{item.getScore()}</td>
+        </tr>
+        ))}
+          
         </tbody>
       </table>
     </div>
