@@ -5,16 +5,15 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
-import ListStudent from "../components/ListStudent";
-import "./Home.css";
+import AddSinhVien from "../components/AddStudent";
+import "./Add.css";
 
-const Home: React.FC = () => {
+const Add: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Quản lý sinh viên</IonTitle>
+          <IonTitle>Thêm sinh viên</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -23,10 +22,10 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ListStudent />
+        <AddSinhVien />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Add;
