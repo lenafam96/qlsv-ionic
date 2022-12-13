@@ -1,16 +1,12 @@
 import "./AddStudent.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Student } from "../models/Student";
 import { StudentArray } from "../models/StudentArray";
 
-interface ContainerProps {
-  count: number;
-}
+interface ContainerProps {}
 
 const AddStudent: React.FC<ContainerProps> = () => {
-  const history = useHistory();
-
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -24,8 +20,6 @@ const AddStudent: React.FC<ContainerProps> = () => {
     StudentArray.push(st);
     // console.log(id, name, address, avatar, score);
     console.log(StudentArray[0]);
-
-    history.push("/home");
   };
 
   const handleInputAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +96,9 @@ const AddStudent: React.FC<ContainerProps> = () => {
           </tr>
         </tbody>
       </table>
-      <button onClick={handleClick}>Thêm</button>
+      <Link to="home">
+        <button onClick={handleClick}>Thêm</button>
+      </Link>
       <Link to="back">
         <button>Quay lại</button>
       </Link>

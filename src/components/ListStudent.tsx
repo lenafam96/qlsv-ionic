@@ -13,9 +13,10 @@ const ListStudent: React.FC<ContainerProps> = () => {
 
   useEffect(() => {
     // console.log(arr);
+    setClick(click + 1);
 
     setArr(StudentArray);
-  }, [click]);
+  }, [StudentArray]);
 
   const handleClick = () => {
     console.log(StudentArray);
@@ -54,6 +55,7 @@ const ListStudent: React.FC<ContainerProps> = () => {
       </table>
       <p>{StudentArray.length}</p>
       <p>{arr.length}</p>
+      <p>{click}</p>
       <button onClick={handleClick}>Refresh</button>
     </div>
   );

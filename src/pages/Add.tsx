@@ -5,7 +5,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { count } from "console";
 import AddStudent from "../components/AddStudent";
 import "./Add.css";
 
@@ -23,7 +22,7 @@ const Add: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <AddStudent count={0} />
+        <AddStudent />
       </IonContent>
     </IonPage>
   );
