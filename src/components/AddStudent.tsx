@@ -1,12 +1,15 @@
 import "./AddStudent.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Student } from "../models/Student";
 import { StudentArray } from "../models/StudentArray";
 
-interface ContainerProps {}
+interface ContainerProps {
+  popup:boolean;
+  updatePopup:(arg:boolean) => void
+}
 
-const AddStudent: React.FC<ContainerProps> = () => {
+const AddStudent: React.FC<ContainerProps> = ({popup,updatePopup}) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -18,9 +21,16 @@ const AddStudent: React.FC<ContainerProps> = () => {
     console.log(StudentArray);
 
     StudentArray.push(st);
+    updatePopup(!popup);
     // console.log(id, name, address, avatar, score);
     console.log(StudentArray[0]);
   };
+  useEffect(() => {
+    // console.log(popup);
+    console.log("🚀 ~ file: AddStudent.tsx:28 ~ useEffect ~ popup", popup)
+    
+  }, [popup])
+  
 
   const handleInputAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     let img = e.target.files;
@@ -28,9 +38,10 @@ const AddStudent: React.FC<ContainerProps> = () => {
     if (!img) return;
     setAvatar(URL.createObjectURL(img[0]));
   };
+  
   return (
-    <div className="container">
-      <table>
+    <div className="container" id="addStudent">
+      <table className="addSt">
         <tbody>
           <tr>
             <td>Id</td>

@@ -2,6 +2,7 @@ import "./ListStudent.css";
 import { Link } from "react-router-dom";
 import { StudentArray } from "../models/StudentArray";
 import { useEffect, useState } from "react";
+import AddStudent from "./AddStudent";
 interface ContainerProps {}
 
 const ListStudent: React.FC<ContainerProps> = () => {
@@ -10,25 +11,31 @@ const ListStudent: React.FC<ContainerProps> = () => {
 
   const [arr, setArr] = useState(StudentArray);
   const [click, setClick] = useState(0);
+  const [popup, setPopup] = useState(true)
 
   useEffect(() => {
     // console.log(arr);
-    setClick(click + 1);
+    // setClick(click + 1);
 
-    setArr(StudentArray);
-  }, [StudentArray]);
-
+    // setArr(StudentArray);
+  }, [popup]);
+const updatePopup = (pop:boolean)=>{
+  setPopup(pop);
+}
   const handleClick = () => {
     console.log(StudentArray);
-
+console.log(popup);
+setPopup(!popup)
     setClick(click + 1);
   };
 
+
   return (
     <div className="container">
-      <Link to="add">
-        <button>Thêm sinh viên</button>
-      </Link>
+      {/* <Link to="add"> */}
+      {popup && <AddStudent popup={popup} updatePopup={updatePopup}/>}
+      {popup ?" " : <button onClick={handleClick} >Thêm sinh viên</button>}
+      {/* </Link> */}
       <table>
         <thead>
           <tr>
