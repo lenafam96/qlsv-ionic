@@ -38,9 +38,12 @@ const EditStudent: React.FC<ContainerProps> = ({
   };
 
   const handleClickDelete = (id: string) => {
-    StudentArray.filter((st) => {
-      return st.getId() !== id;
-    });
+    for (let index = 0; index < StudentArray.length; index++) {
+      if (StudentArray[index].getId() === id) {
+        StudentArray.splice(index, 1);
+        break;
+      }
+    }
     console.log(id);
 
     console.log(StudentArray);
