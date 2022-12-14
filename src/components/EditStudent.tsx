@@ -6,37 +6,50 @@ import { StudentArray } from "../models/StudentArray";
 
 interface ContainerProps {
   popup: boolean;
+  student: Student;
   updatePopup: (arg: boolean) => void;
 }
 
-const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
+const EditStudent: React.FC<ContainerProps> = ({
+  popup,
+  updatePopup,
+  student,
+}) => {
+  const [id, setId] = useState(student.getId());
+  const [name, setName] = useState(student.getName());
+  const [address, setAddress] = useState(student.getAddress());
   const [avatar, setAvatar] = useState("");
-  const [score, setScore] = useState("");
+  const [score, setScore] = useState(String(student.getScore()));
 
-  const handleClick = () => {
-    if (
-      id === "" ||
-      name === "" ||
-      avatar === "" ||
-      address === "" ||
-      score === ""
-    ) {
+  const handleClickEdit = () => {
+    if (id === "" || name === "" || address === "" || score === "") {
       return;
     }
-    const st = new Student(id, name, address, avatar, Number(score));
-    console.log(StudentArray);
+    student.setId(id);
+    student.setName(name);
+    student.setAddress(address);
+    student.setScore(Number(score));
+    if (avatar !== "") student.setAvatar(avatar);
 
-    StudentArray.push(st);
+    // StudentArray.push(st);
     updatePopup(!popup);
     // console.log(id, name, address, avatar, score);
-    console.log(StudentArray[0]);
+    console.log(student);
+  };
+
+  const handleClickDelete = (id: string) => {
+    StudentArray.filter((st) => {
+      return st.getId() !== id;
+    });
+    console.log(id);
+
+    console.log(StudentArray);
+    updatePopup(!popup);
   };
   useEffect(() => {
     // console.log(popup);
-    console.log("🚀 ~ file: AddStudent.tsx:28 ~ useEffect ~ popup", popup);
+    // console.log("🚀 ~ file: AddStudent.tsx:28 ~ useEffect ~ popup", popup);
+    console.log(student);
   }, [popup]);
 
   const handleInputAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +70,7 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
                 type="text"
                 name="id"
                 id=""
-                required
+                defaultValue={student.getId()}
                 onChange={(e) => setId(e.target.value)}
               />
             </td>
@@ -69,7 +82,7 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
                 type="text"
                 name="name"
                 id=""
-                required
+                defaultValue={student.getName()}
                 onChange={(e) => setName(e.target.value)}
               />
             </td>
@@ -81,7 +94,7 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
                 type="text"
                 name="address"
                 id=""
-                required
+                defaultValue={student.getAddress()}
                 onChange={(e) => setAddress(e.target.value)}
               />
             </td>
@@ -95,7 +108,6 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
                 name="avatar"
                 id=""
                 multiple={false}
-                required
                 onChange={(e) => handleInputAvatar(e)}
               />
             </td>
@@ -107,7 +119,7 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
                 type="number"
                 name="score"
                 id=""
-                required
+                defaultValue={student.getScore()}
                 onChange={(e) => setScore(e.target.value)}
               />
             </td>
@@ -115,7 +127,10 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
         </tbody>
       </table>
       <Link to="home">
-        <button onClick={handleClick}>Thêm</button>
+        <button onClick={handleClickEdit}>Cập nhật</button>
+      </Link>
+      <Link to="home">
+        <button onClick={() => handleClickDelete(id)}>Xoá</button>
       </Link>
       <Link to="back">
         <button
@@ -130,4 +145,4 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
   );
 };
 
-export default AddStudent;
+export default EditStudent;

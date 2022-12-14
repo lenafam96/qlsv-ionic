@@ -6,11 +6,11 @@ class Student {
   private score: number;
 
   public constructor(
-    id: string,
-    name: string,
-    address: string,
-    avatar: string,
-    score: number
+    id: string = "",
+    name: string = "",
+    address: string = "",
+    avatar: string = "",
+    score: number = 0
   ) {
     this.id = id;
     this.name = name;

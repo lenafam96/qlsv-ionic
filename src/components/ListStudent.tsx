@@ -1,8 +1,9 @@
 import "./ListStudent.css";
-import { Link } from "react-router-dom";
 import { StudentArray } from "../models/StudentArray";
+import { Student } from "../models/Student";
 import { useEffect, useState } from "react";
 import AddStudent from "./AddStudent";
+import EditStudent from "./EditStudent";
 interface ContainerProps {}
 
 const ListStudent: React.FC<ContainerProps> = () => {
@@ -10,32 +11,42 @@ const ListStudent: React.FC<ContainerProps> = () => {
   // console.log(StudentArray);
 
   const [arr, setArr] = useState(StudentArray);
-  const [click, setClick] = useState(0);
-  const [popup, setPopup] = useState(true)
+  const [popupAdd, setPopupAdd] = useState(false);
+  const [popupEdit, setPopupEdit] = useState(false);
+  const [student, setStudent] = useState(new Student());
 
   useEffect(() => {
     // console.log(arr);
     // setClick(click + 1);
-
     // setArr(StudentArray);
-  }, [popup]);
-const updatePopup = (pop:boolean)=>{
-  setPopup(pop);
-}
-  const handleClick = () => {
-    console.log(StudentArray);
-console.log(popup);
-setPopup(!popup)
-    setClick(click + 1);
+  }, [popupAdd, popupEdit]);
+  const updatePopupAdd = (pop: boolean) => {
+    setPopupAdd(pop);
   };
 
+  const updatePopupEdit = (pop: boolean) => {
+    setPopupEdit(pop);
+  };
+  const handleClick = () => {
+    setPopupAdd(!popupAdd);
+  };
+
+  const showPopupEdit = (st: Student) => {
+    setPopupEdit(!popupEdit);
+    setStudent(st);
+  };
 
   return (
     <div className="container">
-      {/* <Link to="add"> */}
-      {popup && <AddStudent popup={popup} updatePopup={updatePopup}/>}
-      {popup ?" " : <button onClick={handleClick} >Thêm sinh viên</button>}
-      {/* </Link> */}
+      {popupAdd && <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />}
+      {popupEdit && (
+        <EditStudent
+          popup={popupEdit}
+          updatePopup={updatePopupEdit}
+          student={student}
+        />
+      )}
+      {popupAdd ? " " : <button onClick={handleClick}>Thêm sinh viên</button>}
       <table>
         <thead>
           <tr>
@@ -48,7 +59,12 @@ setPopup(!popup)
         </thead>
         <tbody>
           {arr.map((item) => (
-            <tr key={item.getId()}>
+            <tr
+              key={item.getId()}
+              onClick={() => {
+                showPopupEdit(item);
+              }}
+            >
               <td>{item.getId()}</td>
               <td>{item.getName()}</td>
               <td>{item.getAddress()}</td>
@@ -60,10 +76,6 @@ setPopup(!popup)
           ))}
         </tbody>
       </table>
-      <p>{StudentArray.length}</p>
-      <p>{arr.length}</p>
-      <p>{click}</p>
-      <button onClick={handleClick}>Refresh</button>
     </div>
   );
 };
