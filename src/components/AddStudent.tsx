@@ -2,7 +2,7 @@ import "./AddStudent.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Student } from "../models/Student";
-import { StudentArray } from "../models/StudentArray";
+import { checkIdExists, StudentArray } from "../models/StudentArray";
 
 interface ContainerProps {
   popup: boolean;
@@ -22,7 +22,8 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
       name === "" ||
       avatar === "" ||
       address === "" ||
-      score === ""
+      score === "" ||
+      checkIdExists(id)
     ) {
       return;
     }
@@ -115,10 +116,13 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
         </tbody>
       </table>
       <Link to="home">
-        <button className="btnAdd" onClick={handleClick}>Thêm</button>
+        <button className="btnAdd" onClick={handleClick}>
+          Thêm
+        </button>
       </Link>
       <Link to="back">
-        <button className="btnBack"
+        <button
+          className="btnBack"
           onClick={() => {
             updatePopup(!popup);
           }}
