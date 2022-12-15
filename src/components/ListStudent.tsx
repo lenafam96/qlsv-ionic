@@ -14,12 +14,13 @@ const ListStudent: React.FC<ContainerProps> = () => {
   const [popupAdd, setPopupAdd] = useState(false);
   const [popupEdit, setPopupEdit] = useState(false);
   const [student, setStudent] = useState(new Student());
+  const [sort, setSort] = useState(false);
 
   useEffect(() => {
     // console.log(arr);
     // setClick(click + 1);
     // setArr(StudentArray);
-  }, [popupAdd, popupEdit]);
+  }, [popupAdd, popupEdit, sort]);
   const updatePopupAdd = (pop: boolean) => {
     setPopupAdd(pop);
   };
@@ -36,6 +37,15 @@ const ListStudent: React.FC<ContainerProps> = () => {
     setStudent(st);
   };
 
+  const sortButtonClick = () => {
+    if (sort) {
+      StudentArray.sort((a, b) => a.getScore() - b.getScore());
+    } else {
+      StudentArray.sort((a, b) => b.getScore() - a.getScore());
+    }
+    setSort(!sort);
+  };
+
   return (
     <div className="container">
       {popupAdd && <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />}
@@ -47,6 +57,7 @@ const ListStudent: React.FC<ContainerProps> = () => {
         />
       )}
       {popupAdd ? " " : <button onClick={handleClick}>Thêm sinh viên</button>}
+      <button onClick={sortButtonClick}>Sắp xếp</button>
       <table>
         <thead>
           <tr>
