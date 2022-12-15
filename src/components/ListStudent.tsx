@@ -65,7 +65,8 @@ const ListStudent: React.FC<ContainerProps> = () => {
           ) : (
             <button onClick={handleClick}>Thêm sinh viên</button>
           )}
-          <button onClick={sortButtonClick}>Sắp xếp</button>
+          {sort ? <button onClick={sortButtonClick}>Sắp xếp ASC </button> : <button onClick={sortButtonClick}>Sắp xếp DESC </button>  }
+
         </div>
         <div className="table-container">
           <table>
