@@ -50,15 +50,22 @@ const ListStudent: React.FC<ContainerProps> = () => {
     <div className="container">
       <div className="main">
         <div className="button-container">
-        {popupAdd && <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />}
-        {popupEdit && (
-          <EditStudent
-            popup={popupEdit}
-            updatePopup={updatePopupEdit}
-            student={student}
-          />
-        )}
-        {popupAdd ? " " : <button onClick={handleClick}>Thêm sinh viên</button>}
+          {popupAdd && (
+            <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />
+          )}
+          {popupEdit && (
+            <EditStudent
+              popup={popupEdit}
+              updatePopup={updatePopupEdit}
+              student={student}
+            />
+          )}
+          {popupAdd ? (
+            " "
+          ) : (
+            <button onClick={handleClick}>Thêm sinh viên</button>
+          )}
+          <button onClick={sortButtonClick}>Sắp xếp</button>
         </div>
         <div className="table-container">
           <table>
