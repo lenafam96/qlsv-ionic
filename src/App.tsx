@@ -29,16 +29,16 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route  path="/home">
+        <Route path="/home">
           <Home />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route  path="/add">
+        <Route path="/add">
           <Add />
         </Route>
-        <Route  path="/back">
+        <Route path="/back">
           <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>

@@ -1,8 +1,7 @@
 import "./AddStudent.css";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { Student } from "../models/Student";
-import { StudentArray } from "../models/StudentArray";
+import axios from "axios";
 
 interface ContainerProps {}
 
@@ -15,15 +14,21 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   const [avatar, setAvatar] = useState("");
   const [score, setScore] = useState("");
   const [idError, setIdError] = useState(false);
+  const [newST, setNewST] = useState({});
   const handleClick = () => {
-    const st = new Student(id, name, address, avatar, Number(score));
-    console.log(StudentArray);
-
-    StudentArray.push(st);
-    // console.log(id, name, address, avatar, score);
-    console.log(StudentArray[0]);
-    
+    post({ id, name, address, avatar, score });
     history.push("/home");
+  };
+
+  const post = async (data: any) => {
+    await axios
+      .post("https://639a835ad514150197376164.mockapi.io/student", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleInputAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {

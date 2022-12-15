@@ -1,11 +1,23 @@
 import "./ListStudent.css";
 import { Link } from "react-router-dom";
-import { StudentArray } from "../models/StudentArray";
+import { useEffect, useState } from "react";
+import axios from "axios";
 interface ContainerProps {}
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
-  console.log(StudentArray.length);
-  
+  const [studentArray, setStudentArray] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(
+        "https://639a835ad514150197376164.mockapi.io/student"
+      );
+      setStudentArray(res.data);
+    };
+    getData();
+    console.log(studentArray);
+  }, [studentArray]);
+
   return (
     <div className="container">
       <Link to="add">
@@ -22,21 +34,17 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </tr>
         </thead>
         <tbody>
-        {StudentArray.map((item) => (
-          <tr>
-            <td>{item.getId()}</td>
-            <td>{item.getName()}</td>
-            <td>{item.getAddress()}</td>
-            <td id="avatar">
-              <img
-                src={item.getAvatar()}
-                alt=""
-              />
-            </td>
-            <td>{item.getScore()}</td>
-        </tr>
-        ))}
-          
+          {studentArray.map((item: any) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.address}</td>
+              <td id="avatar">
+                <img src={item.avatar} alt="" />
+              </td>
+              <td>{item.score}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
