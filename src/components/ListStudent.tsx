@@ -38,45 +38,49 @@ const ListStudent: React.FC<ContainerProps> = () => {
 
   return (
     <div className="container">
-      {popupAdd && <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />}
-      {popupEdit && (
-        <EditStudent
-          popup={popupEdit}
-          updatePopup={updatePopupEdit}
-          student={student}
-        />
-      )}
-      {popupAdd ? " " : <button onClick={handleClick}>Thêm sinh viên</button>}
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Avatar</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {arr.map((item) => (
-              <tr
-                key={item.getId()}
-                onClick={() => {
-                  showPopupEdit(item);
-                }}
-              >
-                <td>{item.getId()}</td>
-                <td>{item.getName()}</td>
-                <td>{item.getAddress()}</td>
-                <td id="avatar">
-                  <img src={item.getAvatar()} alt="" />
-                </td>
-                <td>{item.getScore()}</td>
+      <div className="main">
+        <div className="button-container">
+        {popupAdd && <AddStudent popup={popupAdd} updatePopup={updatePopupAdd} />}
+        {popupEdit && (
+          <EditStudent
+            popup={popupEdit}
+            updatePopup={updatePopupEdit}
+            student={student}
+          />
+        )}
+        {popupAdd ? " " : <button onClick={handleClick}>Thêm sinh viên</button>}
+        </div>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Avatar</th>
+                <th>Score</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {arr.map((item) => (
+                <tr
+                  key={item.getId()}
+                  onClick={() => {
+                    showPopupEdit(item);
+                  }}
+                >
+                  <td>{item.getId()}</td>
+                  <td>{item.getName()}</td>
+                  <td>{item.getAddress()}</td>
+                  <td id="avatar">
+                    <img src={item.getAvatar()} alt="" />
+                  </td>
+                  <td>{item.getScore()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
