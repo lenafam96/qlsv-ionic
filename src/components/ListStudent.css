@@ -11,12 +11,15 @@
   text-decoration: none;
 }
 
-a{
+a {
   margin: 20px 0;
   display: inline-block;
 }
 
-table,td,th,tr{
+table,
+td,
+th,
+tr {
   border: 1px solid #ccc;
 }
 
@@ -26,6 +29,48 @@ table {
   border-spacing: 0;
 }
 
-#avatar{
+#avatar {
   width: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    position: relative;
+  }
+  .container {
+    text-align: center;
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 99;
+  }
+
+  .container a {
+    text-decoration: none;
+  }
+
+  a {
+    margin: 20px 0;
+    display: inline-block;
+  }
+
+  table,
+  td,
+  th,
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  #avatar {
+    width: 30%;
+  }
 }
