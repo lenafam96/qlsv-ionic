@@ -47,7 +47,7 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
   };
 
   return (
-    <div className="container" id="addStudent">
+    <div className="containerEdit" id="addStudent">
       <table className="addSt">
         <tbody>
           <tr>
@@ -115,10 +115,10 @@ const AddStudent: React.FC<ContainerProps> = ({ popup, updatePopup }) => {
         </tbody>
       </table>
       <Link to="home">
-        <button onClick={handleClick}>Thêm</button>
+        <button className="btnAdd" onClick={handleClick}>Thêm</button>
       </Link>
       <Link to="back">
-        <button
+        <button className="btnBack"
           onClick={() => {
             updatePopup(!popup);
           }}
