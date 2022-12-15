@@ -34,50 +34,9 @@ table {
 }
 
 @media only screen and (max-width: 600px) {
-  /* body {
-  }
   .container {
-    text-align: center;
-    background-color: red;
+    background-color: white;
     width: 100vw;
-    height: 600vh;
-    z-index: 9999;
-    position: relative;
-  }
-  .table-container {
-    position: sticky;
-    top: 100px;
-    left: 0;
-  }
-  .container a {
-    text-decoration: none;
-  }
-
-  a {
-    margin: 20px 0;
-    display: inline-block;
-  }
-
-  table,
-  td,
-  th,
-  tr {
-    border: 1px solid #ccc;
-  }
-
-  table {
-    margin: 0 auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-
-  #avatar {
-    width: 30%;
-  } */
-  .container {
-    /* background-color: red; */
-    width: 100vw;
-    /* height: max-content; */
     height: 100vh;
     position: relative;
   }
