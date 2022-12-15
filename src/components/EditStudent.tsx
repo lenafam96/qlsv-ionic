@@ -2,7 +2,7 @@ import "./AddStudent.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Student } from "../models/Student";
-import { StudentArray } from "../models/StudentArray";
+import { StudentArray, checkIdExistsToUpdate } from "../models/StudentArray";
 
 interface ContainerProps {
   popup: boolean;
@@ -22,7 +22,13 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState(String(student.getScore()));
 
   const handleClickEdit = () => {
-    if (id === "" || name === "" || address === "" || score === "") {
+    if (
+      id === "" ||
+      name === "" ||
+      address === "" ||
+      score === "" ||
+      checkIdExistsToUpdate(student.getId(), id)
+    ) {
       return;
     }
     student.setId(id);

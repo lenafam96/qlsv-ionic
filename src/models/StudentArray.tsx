@@ -11,3 +11,15 @@ export function checkIdExists(id: string): boolean {
   }
   return false;
 }
+
+export function checkIdExistsToUpdate(oldID: string, newId: string): boolean {
+  const tempArray = StudentArray.filter((item) => {
+    return oldID !== item.getId();
+  });
+  for (let i = 0; i < tempArray.length; i++) {
+    if (tempArray[i].getId() === newId) {
+      return true;
+    }
+  }
+  return false;
+}
