@@ -22,7 +22,7 @@ const Add: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <AddSinhVien />
+        {/* <AddSinhVien /> */}
       </IonContent>
     </IonPage>
   );

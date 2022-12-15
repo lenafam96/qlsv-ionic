@@ -2,27 +2,35 @@ import "./ListStudent.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-interface ContainerProps {}
+interface ContainerProps {
+  data: any[];
+  getData: () => void;
+  addPageActive: boolean;
+  setAddPageActive: (flag: boolean) => void;
+  editPageActive: boolean;
+  setEditPageActive: (flag: boolean) => void;
+  setId: (id: string) => void;
+}
 
-const ExploreContainer: React.FC<ContainerProps> = () => {
-  const [studentArray, setStudentArray] = useState([]);
-
+const ExploreContainer: React.FC<ContainerProps> = ({
+  data,
+  getData,
+  addPageActive,
+  setAddPageActive,
+  editPageActive,
+  setEditPageActive,
+  setId,
+}) => {
   useEffect(() => {
-    const getData = async () => {
-      const res = await axios.get(
-        "https://639a835ad514150197376164.mockapi.io/student"
-      );
-      setStudentArray(res.data);
-    };
     getData();
-    console.log(studentArray);
-  }, [studentArray]);
+    // console.log(data);
+  }, []);
 
   return (
     <div className="container">
-      <Link to="add">
-        <button>Thêm sinh viên</button>
-      </Link>
+      <button onClick={() => setAddPageActive(!addPageActive)}>
+        Thêm sinh viên
+      </button>
       <table>
         <thead>
           <tr>
@@ -34,8 +42,14 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
           </tr>
         </thead>
         <tbody>
-          {studentArray.map((item: any) => (
-            <tr key={item.id}>
+          {data.map((item: any) => (
+            <tr
+              key={item.id}
+              onClick={() => {
+                setEditPageActive(!editPageActive);
+                setId(item.id);
+              }}
+            >
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.address}</td>

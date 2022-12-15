@@ -1,19 +1,22 @@
 import "./AddStudent.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 interface ContainerProps {
   data: any[];
-  postData: (data: any) => void;
-  addPageActive: boolean;
-  setAddPageActive: (flag: boolean) => void;
+  putData: (id: string, data: any) => void;
+  editPageActive: boolean;
+  setEditPageActive: (flag: boolean) => void;
+  currentId: string;
+  getDataById: (id: string) => {};
 }
 
-const AddStudent: React.FC<ContainerProps> = ({
+const EditStudent: React.FC<ContainerProps> = ({
   data,
-  postData,
-  addPageActive,
-  setAddPageActive,
+  putData,
+  editPageActive,
+  setEditPageActive,
+  currentId,
+  getDataById,
 }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -21,12 +24,17 @@ const AddStudent: React.FC<ContainerProps> = ({
   const [avatar, setAvatar] = useState("");
   const [score, setScore] = useState("");
   const [idError, setIdError] = useState(false);
+  const [student, setStudent] = useState({});
 
-  // const location = useLocation();
+  useEffect(() => {
+    setStudent(getDataById(currentId));
+    console.log(getDataById(currentId));
+    console.log(currentId);
+  }, []);
 
   const handleClick = async () => {
-    await postData({ id, name, address, avatar, score });
-    setAddPageActive(!addPageActive);
+    await putData(currentId, { id, name, address, avatar, score });
+    setEditPageActive(!editPageActive);
     // window.location.reload();
   };
 
@@ -47,6 +55,7 @@ const AddStudent: React.FC<ContainerProps> = ({
                 type="text"
                 name="id"
                 id=""
+                defaultValue={currentId}
                 onChange={(e) => setId(e.target.value)}
               />
             </td>
@@ -58,6 +67,7 @@ const AddStudent: React.FC<ContainerProps> = ({
                 type="text"
                 name="name"
                 id=""
+                defaultValue={""}
                 onChange={(e) => setName(e.target.value)}
               />
             </td>
@@ -99,10 +109,12 @@ const AddStudent: React.FC<ContainerProps> = ({
           </tr>
         </tbody>
       </table>
-      <button onClick={handleClick}>Thêm</button>
-      <button onClick={() => setAddPageActive(!addPageActive)}>Quay lại</button>
+      <button onClick={handleClick}>Cập nhật</button>
+      <button onClick={() => setEditPageActive(!editPageActive)}>
+        Quay lại
+      </button>
     </div>
   );
 };
 
-export default AddStudent;
+export default EditStudent;
