@@ -19,27 +19,41 @@ const Home: React.FC = () => {
   const [editPageActive, setEditPageActive] = useState(false);
   const [currentId, setCurrentId] = useState("");
 
-  const getData = async () => {
-    await axios
-      .get(`https://639aebc9d5141501974456ff.mockapi.io/student`)
-      .then((response) => {
-        setData(response.data);
-      });
-  };
-
-  const getDataById = async (id: string) => {
-    await axios
-      .get(`https://639aebc9d5141501974456ff.mockapi.io/student/` + id)
-      .then((response) => {
-        console.log(response.data);
-
-        return response.data;
-      });
+  const getData = async (sort: string = "", search: string = "") => {
+    if (search === "") {
+      if (sort === "asc") {
+        await axios
+          .get(`http://172.31.109.52:8000/students/score_asc`)
+          .then((response) => {
+            setData(response.data);
+          });
+      } else if (sort === "desc") {
+        await axios
+          .get(`http://172.31.109.52:8000/students/score_desc`)
+          .then((response) => {
+            setData(response.data);
+          });
+      } else {
+        await axios
+          .get(`http://172.31.109.52:8000/students/`)
+          .then((response) => {
+            setData(response.data);
+          });
+      }
+    } else {
+      await axios
+        .get(
+          `http://172.31.109.52:8000/students/search?search=${search}&sort=${sort}`
+        )
+        .then((response) => {
+          setData(response.data);
+        });
+    }
   };
 
   const postData = async (data: any) => {
     await axios
-      .post("https://639aebc9d5141501974456ff.mockapi.io/student", data)
+      .post("http://172.31.109.52:8000/students/create", data)
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -51,7 +65,19 @@ const Home: React.FC = () => {
 
   const putData = async (id: string, data: any) => {
     await axios
-      .post("https://639aebc9d5141501974456ff.mockapi.io/student/" + id, data)
+      .put("http://172.31.109.52:8000/students/" + id, data)
+      .then((response) => {
+        console.log(response.data);
+        // setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const deleteData = async (id: string) => {
+    await axios
+      .delete("http://172.31.109.52:8000/students/" + id)
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -109,10 +135,10 @@ const Home: React.FC = () => {
           <EditStudent
             data={data}
             putData={putData}
+            deleteData={deleteData}
             editPageActive={editPageActive}
             setEditPageActive={setEditPageActive}
             currentId={currentId}
-            getDataById={getDataById}
           />
         ) : (
           ""

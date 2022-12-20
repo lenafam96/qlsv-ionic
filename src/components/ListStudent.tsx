@@ -1,10 +1,8 @@
 import "./ListStudent.css";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 interface ContainerProps {
   data: any[];
-  getData: () => void;
+  getData: (sort: string, search: string) => void;
   addPageActive: boolean;
   setAddPageActive: (flag: boolean) => void;
   editPageActive: boolean;
@@ -21,16 +19,33 @@ const ExploreContainer: React.FC<ContainerProps> = ({
   setEditPageActive,
   setId,
 }) => {
+  const [sort, setSort] = useState(false);
+  const [search, setSearch] = useState("");
   useEffect(() => {
-    getData();
-    // console.log(data);
-  }, []);
+    getData("", search);
+  }, [search]);
+
+  const sortButtonClick = () => {
+    getData(sort ? "asc" : "desc", search);
+    setSort(!sort);
+  };
 
   return (
     <div className="container">
+      <input
+        type="text"
+        placeholder="Search ..."
+        name="search"
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <button onClick={() => setAddPageActive(!addPageActive)}>
         Thêm sinh viên
       </button>
+      {sort ? (
+        <button onClick={sortButtonClick}>Sắp xếp ASC </button>
+      ) : (
+        <button onClick={sortButtonClick}>Sắp xếp DESC </button>
+      )}
       <table>
         <thead>
           <tr>

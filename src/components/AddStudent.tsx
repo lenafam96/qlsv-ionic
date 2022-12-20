@@ -1,6 +1,12 @@
 import "./AddStudent.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../firebase";
 
 interface ContainerProps {
   data: any[];
@@ -20,13 +26,17 @@ const AddStudent: React.FC<ContainerProps> = ({
   const [address, setAddress] = useState("");
   const [avatar, setAvatar] = useState("");
   const [score, setScore] = useState("");
-  const [idError, setIdError] = useState(false);
+  const [progre, setProgre] = useState(false);
 
   // const location = useLocation();
 
   const handleClick = async () => {
-    await postData({ id, name, address, avatar, score });
-    setAddPageActive(!addPageActive);
+    console.log(progre);
+
+    if (progre && id !== "" && score !== "") {
+      await postData({ id, name, address, avatar, score });
+      setAddPageActive(!addPageActive);
+    }
     // window.location.reload();
   };
 
@@ -34,7 +44,40 @@ const AddStudent: React.FC<ContainerProps> = ({
     let img = e.target.files;
 
     if (!img) return;
-    setAvatar(URL.createObjectURL(img[0]));
+    const fileName = new Date().getTime() + img[0].name;
+    const storage = getStorage(app);
+    const storageRef = ref(storage, fileName);
+
+    const uploadTask = uploadBytesResumable(storageRef, img[0]);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        setProgre(progress === 100);
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+          default:
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setAvatar(downloadURL);
+        });
+      }
+    );
   };
   return (
     <div className="container">
@@ -93,6 +136,7 @@ const AddStudent: React.FC<ContainerProps> = ({
                 type="number"
                 name="score"
                 id=""
+                required
                 onChange={(e) => setScore(e.target.value)}
               />
             </td>
