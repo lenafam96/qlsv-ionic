@@ -72,5 +72,6 @@
     "@capacitor/cli": "4.6.1",
     "@types/ionic": "^3.19.0"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "proxy": "http://localhost:8000/"
 }

@@ -19,7 +19,7 @@ const Add: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
+            <IonTitle size="large">Thêm sinh viên</IonTitle>
           </IonToolbar>
         </IonHeader>
         {/* <AddSinhVien /> */}
