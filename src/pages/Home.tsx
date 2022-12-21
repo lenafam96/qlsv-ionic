@@ -95,13 +95,13 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Quản lý sinh viên</IonTitle>
+          <IonTitle >Quản lý sinh viên</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Quản lý sinh viên</IonTitle>
+            <IonTitle size="large" className="title">Quản lý sinh viên</IonTitle>
           </IonToolbar>
         </IonHeader>
         {addPageActive || editPageActive ? (

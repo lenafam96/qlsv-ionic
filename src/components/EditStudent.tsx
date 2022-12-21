@@ -1,4 +1,4 @@
-import "./AddStudent.css";
+import "./EditStudent.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -112,76 +112,81 @@ const EditStudent: React.FC<ContainerProps> = ({
 
   return (
     <div className="container">
-      <table>
-        <tbody>
-          <tr>
-            <td>Id</td>
-            <td>
-              <input
-                type="text"
-                name="id"
-                id=""
-                defaultValue={currentId}
-                onChange={(e) => setId(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>
-              <input
-                type="text"
-                name="name"
-                id=""
-                defaultValue={student.name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>
-              <input
-                type="text"
-                name="address"
-                id=""
-                defaultValue={student.address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Avatar</td>
-            <td>
-              <input
-                accept="image/*"
-                type="file"
-                name="avatar"
-                id=""
-                multiple={false}
-                onChange={(e) => handleInputAvatar(e)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Score</td>
-            <td>
-              <input
-                type="number"
-                name="score"
-                id=""
-                defaultValue={student.score}
-                onChange={(e) => setScore(e.target.value)}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button onClick={handleClick}>Cập nhật</button>
-      <button onClick={() => handleClickDelete()}>Xoá</button>
-      <button onClick={() => setEditPageActive(!editPageActive)}>
-        Quay lại
-      </button>
+      <div className="container-table">
+        <table>
+          <tbody>
+            <tr>
+              <td>Id</td>
+              <td>
+                <input
+                  type="text"
+                  name="id"
+                  id=""
+                  defaultValue={currentId}
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>
+                <input
+                  type="text"
+                  name="name"
+                  id=""
+                  defaultValue={student.name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>
+                <input
+                  type="text"
+                  name="address"
+                  id=""
+                  defaultValue={student.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Avatar</td>
+              <td>
+                <input
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id=""
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Score</td>
+              <td>
+                <input
+                  type="number"
+                  name="score"
+                  id=""
+                  defaultValue={student.score}
+                  onChange={(e) => setScore(e.target.value)}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="container-btn">
+        <button className="btn-a" onClick={handleClick}>Cập nhật</button>
+        <button className="btn-a" onClick={() => handleClickDelete()}>Xoá</button>
+        <button className="btn-a" onClick={() => setEditPageActive(!editPageActive)}>
+          Quay lại
+        </button>
+      </div>
+     
     </div>
   );
 };
