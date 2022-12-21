@@ -91,10 +91,6 @@ const Home: React.FC = () => {
     setCurrentId(id);
   };
 
-  // useEffect(() => {
-  //   console.log(editPageActive);
-  // }, [editPageActive]);
-
   return (
     <IonPage>
       <IonHeader>

@@ -73,5 +73,5 @@
     "@types/ionic": "^3.19.0"
   },
   "description": "An Ionic project",
-  "proxy": "http://localhost:8000/"
+  "proxy": "http://172.31.74.87:8000/"
 }
