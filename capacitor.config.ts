@@ -1,7 +1,12 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  server: {
+    androidScheme: "http",
+    allowNavigation: ["http://172.31.109.52:8000/students/"],
+    cleartext: true,
+  },
+  appId: 'com.example.app',
   appName: 'qlsv',
   webDir: 'build',
   bundledWebRuntime: false

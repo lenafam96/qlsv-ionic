@@ -37,7 +37,7 @@ const EditStudent: React.FC<ContainerProps> = ({
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
-        .get(`students/searchById?id=` + id)
+        .get(`http://172.31.109.52:8000/students/searchById?id=` + id)
         .then((response) => {
           console.log(response.data);
 
