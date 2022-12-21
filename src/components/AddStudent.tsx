@@ -81,70 +81,78 @@ const AddStudent: React.FC<ContainerProps> = ({
   };
   return (
     <div className="container">
-      <table>
-        <tbody>
-          <tr>
-            <td>Id</td>
-            <td>
-              <input
-                type="text"
-                name="id"
-                id=""
-                onChange={(e) => setId(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>
-              <input
-                type="text"
-                name="name"
-                id=""
-                onChange={(e) => setName(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>
-              <input
-                type="text"
-                name="address"
-                id=""
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Avatar</td>
-            <td>
-              <input
-                accept="image/*"
-                type="file"
-                name="avatar"
-                id=""
-                multiple={false}
-                onChange={(e) => handleInputAvatar(e)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Score</td>
-            <td>
-              <input
-                type="number"
-                name="score"
-                id=""
-                required
-                onChange={(e) => setScore(e.target.value)}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button onClick={handleClick}>Thêm</button>
-      <button onClick={() => setAddPageActive(!addPageActive)}>Quay lại</button>
+      <div className="container-table">
+        <table>
+          <tbody>
+            <tr>
+              <td>Id</td>
+              <td>
+                <input
+                  type="text"
+                  name="id"
+                  id=""
+                  placeholder="Your id...."
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>
+                <input
+                  type="text"
+                  name="name"
+                  id=""
+                  placeholder="Your name..."
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>
+                <input
+                  type="text"
+                  name="address"
+                  id=""
+                  placeholder="Your address..."
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Avatar</td>
+              <td>
+                <input
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id=""
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Score</td>
+              <td>
+                <input
+                  type="number"
+                  name="score"
+                  id=""
+                  required
+                  placeholder="Your score..."
+                  onChange={(e) => setScore(e.target.value)}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="container-btn">
+        <button className="btn-a" onClick={handleClick}>Thêm</button>
+        <button className="btn-a" onClick={() => setAddPageActive(!addPageActive)}>Quay lại</button>
+      </div>
     </div>
   );
 };

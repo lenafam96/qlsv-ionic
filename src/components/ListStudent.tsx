@@ -32,50 +32,63 @@ const ExploreContainer: React.FC<ContainerProps> = ({
 
   return (
     <div className="container">
-      <input
-        type="text"
-        placeholder="Search ..."
-        name="search"
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <button onClick={() => setAddPageActive(!addPageActive)}>
-        Thêm sinh viên
-      </button>
-      {sort ? (
-        <button onClick={sortButtonClick}>Sắp xếp ASC </button>
-      ) : (
-        <button onClick={sortButtonClick}>Sắp xếp DESC </button>
-      )}
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Avatar</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item: any) => (
-            <tr
-              key={item.id}
-              onClick={() => {
-                setEditPageActive(!editPageActive);
-                setId(item.id);
-              }}
-            >
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.address}</td>
-              <td id="avatar">
-                <img src={item.avatar} alt="" />
-              </td>
-              <td>{item.score}</td>
+      <div className="wrapper">
+        <input className="input-search"
+          type="text"
+          placeholder="Search ..."
+          name="search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className="wrapper-button">
+          <div>
+            <button className="btn btn-add" onClick={() => setAddPageActive(!addPageActive)}>
+              Thêm sinh viên
+            </button>
+          </div>
+          <div>
+          {sort ? (
+            <button className="btn btn-sort" onClick={sortButtonClick}>Sắp xếp ASC </button>
+          ) : (
+            <button className="btn btn-sort" onClick={sortButtonClick}>Sắp xếp DESC </button>
+          )}
+          </div>
+          
+        </div>
+        
+      </div>
+      <div className="container-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Avatar</th>
+              <th>Score</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((item: any) => (
+              <tr
+                key={item.id}
+                onClick={() => {
+                  setEditPageActive(!editPageActive);
+                  setId(item.id);
+                }}
+              >
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.address}</td>
+                <td id="avatar">
+                  <img src={item.avatar} alt="" />
+                </td>
+                <td>{item.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
     </div>
   );
 };
