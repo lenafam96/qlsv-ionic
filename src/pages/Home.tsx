@@ -19,23 +19,26 @@ const Home: React.FC = () => {
   const [editPageActive, setEditPageActive] = useState(false);
   const [currentId, setCurrentId] = useState("");
 
+  let proxy = "http://172.31.109.52:8000/".replace("",'')
+
+  
   const getData = async (sort: string = "", search: string = "") => {
     if (search === "") {
       if (sort === "asc") {
         await axios
-          .get(`students/score_asc`)
+          .get(`${proxy}students/score_asc`)
           .then((response) => {
             setData(response.data);
           });
       } else if (sort === "desc") {
         await axios
-          .get(`students/score_desc`)
+          .get(`${proxy}students/score_desc`)
           .then((response) => {
             setData(response.data);
           });
       } else {
         await axios
-          .get(`students/`)
+          .get(`${proxy}students/`)
           .then((response) => {
             setData(response.data);
           });
@@ -43,7 +46,7 @@ const Home: React.FC = () => {
     } else {
       await axios
         .get(
-          `students/search?search=${search}&sort=${sort}`
+          `${proxy}students/search?search=${search}&sort=${sort}`
         )
         .then((response) => {
           setData(response.data);

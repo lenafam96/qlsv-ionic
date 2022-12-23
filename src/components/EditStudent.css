@@ -38,4 +38,11 @@
     flex-direction: column;
     justify-content: center;
   }
+  img.avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    /* border-radius: 50%; */
+    object-fit: cover;
+  }
 }

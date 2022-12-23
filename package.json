@@ -20,8 +20,10 @@
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
     "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
     "firebase": "^9.15.0",
     "history": "^4.9.0",
+    "http-proxy-middleware": "^2.0.6",
     "ionicons": "^6.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -72,6 +74,5 @@
     "@capacitor/cli": "4.6.1",
     "@types/ionic": "^3.19.0"
   },
-  "description": "An Ionic project",
-  "proxy": "http://103.82.20.194:8000/"
+  "description": "An Ionic project"
 }
