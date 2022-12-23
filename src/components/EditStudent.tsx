@@ -33,11 +33,11 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
-
+  let proxy = "http://172.31.109.52:8000/".replace("",'')
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
-        .get(`http://172.31.109.52:8000/students/searchById?id=` + id)
+        .get(`${proxy}students/searchById?id=` + id)
         .then((response) => {
           console.log(response.data);
 
