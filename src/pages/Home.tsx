@@ -26,19 +26,25 @@ const Home: React.FC = () => {
     if (search === "") {
       if (sort === "asc") {
         await axios
+
           .get(`${proxy}students/score_asc`)
+
           .then((response) => {
             setData(response.data);
           });
       } else if (sort === "desc") {
         await axios
+
           .get(`${proxy}students/score_desc`)
+
           .then((response) => {
             setData(response.data);
           });
       } else {
         await axios
+
           .get(`${proxy}students/`)
+
           .then((response) => {
             setData(response.data);
           });
@@ -46,7 +52,9 @@ const Home: React.FC = () => {
     } else {
       await axios
         .get(
+
           `${proxy}students/search?search=${search}&sort=${sort}`
+
         )
         .then((response) => {
           setData(response.data);
@@ -56,7 +64,7 @@ const Home: React.FC = () => {
 
   const postData = async (data: any) => {
     await axios
-      .post("students/create", data)
+      .post("http://172.31.109.58:8000/students/create", data)
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -68,7 +76,7 @@ const Home: React.FC = () => {
 
   const putData = async (id: string, data: any) => {
     await axios
-      .put("students/" + id, data)
+      .put("http://172.31.109.58:8000/students/" + id, data)
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -80,7 +88,7 @@ const Home: React.FC = () => {
 
   const deleteData = async (id: string) => {
     await axios
-      .delete("students/" + id)
+      .delete("http://172.31.109.58:8000/students/" + id)
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -90,6 +98,10 @@ const Home: React.FC = () => {
       });
   };
 
+  useEffect(() => {
+    getData();
+  }, [editPageActive]);
+
   const updateCurrentId = (id: string) => {
     setCurrentId(id);
   };
@@ -98,13 +110,15 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle >Quản lý sinh viên</IonTitle>
+          <IonTitle>Quản lý sinh viên</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large" className="title">Quản lý sinh viên</IonTitle>
+            <IonTitle size="large" className="title">
+              Quản lý sinh viên
+            </IonTitle>
           </IonToolbar>
         </IonHeader>
         {addPageActive || editPageActive ? (
@@ -122,7 +136,6 @@ const Home: React.FC = () => {
         )}
         {addPageActive ? (
           <AddStudent
-            data={data}
             postData={postData}
             addPageActive={addPageActive}
             setAddPageActive={setAddPageActive}
@@ -132,7 +145,6 @@ const Home: React.FC = () => {
         )}
         {editPageActive ? (
           <EditStudent
-            data={data}
             putData={putData}
             deleteData={deleteData}
             editPageActive={editPageActive}
