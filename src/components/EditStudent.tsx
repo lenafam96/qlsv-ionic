@@ -31,11 +31,13 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
-
+  let proxy = "http://172.31.109.52:8000/".replace("",'')
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
-        .get(`http://172.31.109.58:8000/students/searchById?id=` + id)
+
+        .get(`${proxy}students/searchById?id=` + id)
+
         .then((response) => {
           console.log(response.data);
           setStudent(response.data[0]);
@@ -149,6 +151,20 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
             <tr>
               <td>Avatar</td>
+              {avatar ? 
+              <td>
+                <img src={avatar} alt="Avatar" className="avatar"/>
+                
+                <input
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id=""
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
+                  />
+              </td>
+              :
               <td>
                 <input
                   accept="image/*"
@@ -157,8 +173,9 @@ const EditStudent: React.FC<ContainerProps> = ({
                   id=""
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
-                />
+                  />
               </td>
+                }
             </tr>
             <tr>
               <td>Score</td>

@@ -120,6 +120,12 @@ const AddStudent: React.FC<ContainerProps> = ({
             </tr>
             <tr>
               <td>Avatar</td>
+              {avatar ? 
+              <td>
+                <img src={avatar} alt="Avatar" className="avatar"/>
+                
+              </td>
+              :
               <td>
                 <input
                   accept="image/*"
@@ -128,8 +134,9 @@ const AddStudent: React.FC<ContainerProps> = ({
                   id=""
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
-                />
+                  />
               </td>
+                }
             </tr>
             <tr>
               <td>Score</td>
