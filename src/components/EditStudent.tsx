@@ -31,7 +31,7 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
-  let proxy = "http://172.31.109.52:8000/".replace("",'')
+  let proxy = "http://172.31.109.52:8000/".replace("", "");
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
@@ -151,31 +151,31 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
             <tr>
               <td>Avatar</td>
-              {avatar ? 
-              <td>
-                <img src={avatar} alt="Avatar" className="avatar"/>
-                
-                <input
-                  accept="image/*"
-                  type="file"
-                  name="avatar"
-                  id=""
-                  multiple={false}
-                  onChange={(e) => handleInputAvatar(e)}
+              {avatar ? (
+                <td>
+                  <img src={avatar} alt="Avatar" className="avatar" />
+
+                  <input
+                    accept="image/*"
+                    type="file"
+                    name="avatar"
+                    id=""
+                    multiple={false}
+                    onChange={(e) => handleInputAvatar(e)}
                   />
-              </td>
-              :
-              <td>
-                <input
-                  accept="image/*"
-                  type="file"
-                  name="avatar"
-                  id=""
-                  multiple={false}
-                  onChange={(e) => handleInputAvatar(e)}
+                </td>
+              ) : (
+                <td>
+                  <input
+                    accept="image/*"
+                    type="file"
+                    name="avatar"
+                    id=""
+                    multiple={false}
+                    onChange={(e) => handleInputAvatar(e)}
                   />
-              </td>
-                }
+                </td>
+              )}
             </tr>
             <tr>
               <td>Score</td>
@@ -196,7 +196,7 @@ const EditStudent: React.FC<ContainerProps> = ({
         <button className="btn-a" onClick={handleClick}>
           Cập nhật
         </button>
-        <button className="btn-a" onClick={() => handleClickDelete()}>
+        <button className="btn-a" onClick={handleClickDelete}>
           Xoá
         </button>
         <button
@@ -206,7 +206,7 @@ const EditStudent: React.FC<ContainerProps> = ({
           Quay lại
         </button>
       </div>
-      </div>
+    </div>
   );
 };
 
