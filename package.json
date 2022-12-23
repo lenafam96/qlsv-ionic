@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^4.6.1",
     "@capacitor/app": "4.1.1",
     "@capacitor/core": "4.6.1",
     "@capacitor/haptics": "4.1.0",
@@ -72,6 +73,5 @@
     "@capacitor/cli": "4.6.1",
     "@types/ionic": "^3.19.0"
   },
-  "description": "An Ionic project",
-  "proxy": "http://103.82.20.194:8000/"
+  "description": "An Ionic project"
 }

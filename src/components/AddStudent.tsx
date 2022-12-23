@@ -9,14 +9,12 @@ import {
 import app from "../firebase";
 
 interface ContainerProps {
-  data: any[];
   postData: (data: any) => void;
   addPageActive: boolean;
   setAddPageActive: (flag: boolean) => void;
 }
 
 const AddStudent: React.FC<ContainerProps> = ({
-  data,
   postData,
   addPageActive,
   setAddPageActive,

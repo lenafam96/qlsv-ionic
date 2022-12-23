@@ -10,7 +10,6 @@ import {
 import app from "../firebase";
 
 interface ContainerProps {
-  data: any[];
   putData: (id: string, data: any) => void;
   deleteData: (id: string) => void;
   editPageActive: boolean;
@@ -19,7 +18,6 @@ interface ContainerProps {
 }
 
 const EditStudent: React.FC<ContainerProps> = ({
-  data,
   putData,
   deleteData,
   editPageActive,
@@ -37,12 +35,10 @@ const EditStudent: React.FC<ContainerProps> = ({
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
-        .get(`students/searchById?id=` + id)
+        .get(`http://172.31.109.58:8000/students/searchById?id=` + id)
         .then((response) => {
           console.log(response.data);
-
           setStudent(response.data[0]);
-
           setId(response.data[0].id);
           setName(response.data[0].name);
           setAddress(response.data[0].address);
@@ -180,13 +176,19 @@ const EditStudent: React.FC<ContainerProps> = ({
         </table>
       </div>
       <div className="container-btn">
-        <button className="btn-a" onClick={handleClick}>Cập nhật</button>
-        <button className="btn-a" onClick={() => handleClickDelete()}>Xoá</button>
-        <button className="btn-a" onClick={() => setEditPageActive(!editPageActive)}>
+        <button className="btn-a" onClick={handleClick}>
+          Cập nhật
+        </button>
+        <button className="btn-a" onClick={() => handleClickDelete()}>
+          Xoá
+        </button>
+        <button
+          className="btn-a"
+          onClick={() => setEditPageActive(!editPageActive)}
+        >
           Quay lại
         </button>
       </div>
-     
     </div>
   );
 };
