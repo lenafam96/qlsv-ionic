@@ -189,7 +189,7 @@ const EditStudent: React.FC<ContainerProps> = ({
           Quay lại
         </button>
       </div>
-    </div>
+      </div>
   );
 };
 

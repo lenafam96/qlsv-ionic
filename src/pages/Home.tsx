@@ -87,6 +87,10 @@ const Home: React.FC = () => {
       });
   };
 
+  useEffect(() => {
+    getData();
+  }, [editPageActive]);
+
   const updateCurrentId = (id: string) => {
     setCurrentId(id);
   };
