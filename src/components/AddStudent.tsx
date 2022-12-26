@@ -26,7 +26,7 @@ const AddStudent: React.FC<ContainerProps> = ({
   const [avatar, setAvatar] = useState("");
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
-
+  const [isAdd, setIsAdd] = useState(false)
   // const location = useLocation();
 
   const handleClick = async () => {
@@ -35,6 +35,8 @@ const AddStudent: React.FC<ContainerProps> = ({
     if (progre && id !== "" && score !== "") {
       await postData({ id, name, address, avatar, score });
       setAddPageActive(!addPageActive);
+    }else{
+      setIsAdd(true)
     }
     // window.location.reload();
   };
@@ -74,6 +76,7 @@ const AddStudent: React.FC<ContainerProps> = ({
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setAvatar(downloadURL);
+          setIsAdd(false)
         });
       }
     );
@@ -172,6 +175,7 @@ const AddStudent: React.FC<ContainerProps> = ({
             </tr>
           </tbody>
         </table>
+        {isAdd && <span style={{display:"block",color:"red", marginTop:"10px"}}>You need to fill in all the information!</span>}
       </div>
       <div className="container-btn">
         <button className="btn-a" onClick={handleClick}>Thêm</button>

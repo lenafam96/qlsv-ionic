@@ -213,7 +213,7 @@ const EditStudent: React.FC<ContainerProps> = ({
         <button className="btn-a" onClick={handleClick}>
           Cập nhật
         </button>
-        <button className="btn-a" onClick={ handleClickDelete}>
+        <button className="btn-a" onClick={handleClickDelete}>
           Xoá
         </button>
         <button
