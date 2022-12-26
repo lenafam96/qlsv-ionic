@@ -155,24 +155,32 @@ const EditStudent: React.FC<ContainerProps> = ({
               <td>Avatar</td>
               {avatar ? 
               <td>
+                <label htmlFor="pre">
+
                 <img src={avatar} alt="Avatar" className="avatar"/>
+                </label>
                 
                 <input
+                  style={{display: "none"}}
                   accept="image/*"
                   type="file"
                   name="avatar"
-                  id=""
+                  id="pre"
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
                   />
               </td>
               :
               <td>
+                <label htmlFor="avatar">
+                  <img className="pre" src="https://i.ibb.co/j6J7147/svgviewer-png-output.png" alt="" />
+                </label>
                 <input
+                  style={{display: "none"}}
                   accept="image/*"
                   type="file"
                   name="avatar"
-                  id=""
+                  id="avatar"
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
                   />

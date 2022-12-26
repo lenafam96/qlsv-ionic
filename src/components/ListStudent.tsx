@@ -79,7 +79,7 @@ const ExploreContainer: React.FC<ContainerProps> = ({
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.address}</td>
-                <td id="avatar">
+                <td id="avatar" className="preAva">
                   <img src={item.avatar} alt="" />
                 </td>
                 <td>{item.score}</td>
