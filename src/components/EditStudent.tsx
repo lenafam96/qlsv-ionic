@@ -31,6 +31,7 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
+  const [isImage, setIsImage] = useState(false);
   let proxy = "http://172.31.109.52:8000/".replace("",'')
   useEffect(() => {
     const getDataById = async (id: string) => {
@@ -55,9 +56,15 @@ const EditStudent: React.FC<ContainerProps> = ({
     console.log({ id, name, address, avatar, score });
     console.log(progre);
 
-    if (progre) {
+    if(avatar) {
       await putData(currentId, { id, name, address, avatar, score });
       setEditPageActive(!editPageActive);
+    }
+    else if (progre) {
+      await putData(currentId, { id, name, address, avatar, score });
+      setEditPageActive(!editPageActive);
+    }else{
+      setIsImage(true)
     }
 
     // window.location.reload();
@@ -103,6 +110,7 @@ const EditStudent: React.FC<ContainerProps> = ({
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setAvatar(downloadURL);
+          setIsImage(false)
         });
       }
     );
@@ -199,6 +207,7 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
           </tbody>
         </table>
+        {isImage && <span style={{display:"block",color:"red", marginTop:"10px"}}>You need to upload photo!</span>}
       </div>
       <div className="container-btn">
         <button className="btn-a" onClick={handleClick}>
