@@ -64,7 +64,9 @@ const Home: React.FC = () => {
 
   const postData = async (data: any) => {
     await axios
-      .post("http://172.31.109.58:8000/students/create", data)
+
+      .post(`${proxy}students/create`, data)
+
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -76,7 +78,9 @@ const Home: React.FC = () => {
 
   const putData = async (id: string, data: any) => {
     await axios
-      .put("http://172.31.109.58:8000/students/" + id, data)
+
+      .put(`${proxy}students/` + id, data)
+
       .then((response) => {
         console.log(response.data);
         // setData(response.data);
@@ -88,7 +92,9 @@ const Home: React.FC = () => {
 
   const deleteData = async (id: string) => {
     await axios
-      .delete("http://172.31.109.58:8000/students/" + id)
+
+      .delete(`${proxy}students/` + id)
+
       .then((response) => {
         console.log(response.data);
         // setData(response.data);

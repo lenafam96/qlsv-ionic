@@ -1,4 +1,5 @@
 import "./AddStudent.css";
+// import "./PreviewImg.css"
 import { useEffect, useState } from "react";
 import {
   getStorage,
@@ -77,6 +78,8 @@ const AddStudent: React.FC<ContainerProps> = ({
       }
     );
   };
+
+
   return (
     <div className="container">
       <div className="container-table">
@@ -122,16 +125,32 @@ const AddStudent: React.FC<ContainerProps> = ({
               <td>Avatar</td>
               {avatar ? 
               <td>
-                <img src={avatar} alt="Avatar" className="avatar"/>
                 
-              </td>
-              :
-              <td>
+                <label htmlFor="avatar1">
+                  <img src={avatar} alt="Avatar" id="avatar"  className="avatar"/>
+                </label>
                 <input
+                  style={{display: "none"}}
                   accept="image/*"
                   type="file"
                   name="avatar"
-                  id=""
+                  id="avatar1"
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
+                  />
+              </td>
+              :
+              <td>
+                
+                <label htmlFor="avatar">
+                  <img className="pre" src="https://i.ibb.co/j6J7147/svgviewer-png-output.png" alt="" />
+                </label>
+                <input
+                  style={{display: "none"}}
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id="avatar"
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
                   />

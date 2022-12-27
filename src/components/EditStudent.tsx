@@ -31,7 +31,8 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [score, setScore] = useState("");
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
-  let proxy = "http://172.31.109.52:8000/".replace("", "");
+  const [isImage, setIsImage] = useState(false);
+  let proxy = "http://172.31.109.52:8000/".replace("",'');
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
@@ -55,16 +56,22 @@ const EditStudent: React.FC<ContainerProps> = ({
     console.log({ id, name, address, avatar, score });
     console.log(progre);
 
-    if (progre) {
+    if(avatar) {
       await putData(currentId, { id, name, address, avatar, score });
       setEditPageActive(!editPageActive);
+    }
+    else if (progre) {
+      await putData(currentId, { id, name, address, avatar, score });
+      setEditPageActive(!editPageActive);
+    }else{
+      setIsImage(true)
     }
 
     // window.location.reload();
   };
 
-  const handleClickDelete = () => {
-    deleteData(currentId);
+  const handleClickDelete = async () => {
+    await deleteData(currentId);
     setEditPageActive(!editPageActive);
   };
 
@@ -103,6 +110,7 @@ const EditStudent: React.FC<ContainerProps> = ({
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setAvatar(downloadURL);
+          setIsImage(false)
         });
       }
     );
@@ -151,28 +159,36 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
             <tr>
               <td>Avatar</td>
-              {avatar ? (
-                <td>
-                  <img src={avatar} alt="Avatar" className="avatar" />
+              {avatar ? 
+              <td>
+                <label htmlFor="pre">
 
-                  <input
-                    accept="image/*"
-                    type="file"
-                    name="avatar"
-                    id=""
-                    multiple={false}
-                    onChange={(e) => handleInputAvatar(e)}
+                <img src={avatar} alt="Avatar" className="avatar"/>
+                </label>
+                
+                <input
+                  style={{display: "none"}}
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id="pre"
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
                   />
-                </td>
-              ) : (
-                <td>
-                  <input
-                    accept="image/*"
-                    type="file"
-                    name="avatar"
-                    id=""
-                    multiple={false}
-                    onChange={(e) => handleInputAvatar(e)}
+              </td>
+              :
+              <td>
+                <label htmlFor="avatar">
+                  <img className="pre" src="https://i.ibb.co/j6J7147/svgviewer-png-output.png" alt="" />
+                </label>
+                <input
+                  style={{display: "none"}}
+                  accept="image/*"
+                  type="file"
+                  name="avatar"
+                  id="avatar"
+                  multiple={false}
+                  onChange={(e) => handleInputAvatar(e)}
                   />
                 </td>
               )}
@@ -191,12 +207,13 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
           </tbody>
         </table>
+        {isImage && <span style={{display:"block",color:"red", marginTop:"10px"}}>You need to upload photo!</span>}
       </div>
       <div className="container-btn">
         <button className="btn-a" onClick={handleClick}>
           Cập nhật
         </button>
-        <button className="btn-a" onClick={handleClickDelete}>
+        <button className="btn-a" onClick={ handleClickDelete}>
           Xoá
         </button>
         <button

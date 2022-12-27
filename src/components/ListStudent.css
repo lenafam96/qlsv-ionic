@@ -29,9 +29,9 @@ table {
   border-spacing: 0;
 }
 
-#avatar {
+/* #avatar {
   width: 30%;
-}
+} */
 @media only screen and (max-width: 600px) {
   .container {
     display: flex;
@@ -68,5 +68,8 @@ table {
   }
   .container-table {
     padding: 20px;
+  }
+  .preAva {
+    width: 30%;
   }
 }
