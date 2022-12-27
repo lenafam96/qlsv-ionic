@@ -32,7 +32,7 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
   const [isImage, setIsImage] = useState(false);
-  let proxy = "http://172.31.109.52:8000/".replace("",'');
+  let proxy = "http://172.31.109.52:8000/".replace("", "");
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
@@ -56,15 +56,14 @@ const EditStudent: React.FC<ContainerProps> = ({
     console.log({ id, name, address, avatar, score });
     console.log(progre);
 
-    if(avatar) {
+    if (avatar) {
       await putData(currentId, { id, name, address, avatar, score });
       setEditPageActive(!editPageActive);
-    }
-    else if (progre) {
+    } else if (progre) {
       await putData(currentId, { id, name, address, avatar, score });
       setEditPageActive(!editPageActive);
-    }else{
-      setIsImage(true)
+    } else {
+      setIsImage(true);
     }
 
     // window.location.reload();
@@ -110,7 +109,7 @@ const EditStudent: React.FC<ContainerProps> = ({
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setAvatar(downloadURL);
-          setIsImage(false)
+          setIsImage(false);
         });
       }
     );
@@ -159,36 +158,39 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
             <tr>
               <td>Avatar</td>
-              {avatar ? 
-              <td>
-                <label htmlFor="pre">
+              {avatar ? (
+                <td>
+                  <label htmlFor="pre">
+                    <img src={avatar} alt="Avatar" className="avatar" />
+                  </label>
 
-                <img src={avatar} alt="Avatar" className="avatar"/>
-                </label>
-                
-                <input
-                  style={{display: "none"}}
-                  accept="image/*"
-                  type="file"
-                  name="avatar"
-                  id="pre"
-                  multiple={false}
-                  onChange={(e) => handleInputAvatar(e)}
+                  <input
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    type="file"
+                    name="avatar"
+                    id="pre"
+                    multiple={false}
+                    onChange={(e) => handleInputAvatar(e)}
                   />
-              </td>
-              :
-              <td>
-                <label htmlFor="avatar">
-                  <img className="pre" src="https://i.ibb.co/j6J7147/svgviewer-png-output.png" alt="" />
-                </label>
-                <input
-                  style={{display: "none"}}
-                  accept="image/*"
-                  type="file"
-                  name="avatar"
-                  id="avatar"
-                  multiple={false}
-                  onChange={(e) => handleInputAvatar(e)}
+                </td>
+              ) : (
+                <td>
+                  <label htmlFor="avatar">
+                    <img
+                      className="pre"
+                      src="https://i.ibb.co/j6J7147/svgviewer-png-output.png"
+                      alt=""
+                    />
+                  </label>
+                  <input
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    type="file"
+                    name="avatar"
+                    id="avatar"
+                    multiple={false}
+                    onChange={(e) => handleInputAvatar(e)}
                   />
                 </td>
               )}
@@ -207,13 +209,17 @@ const EditStudent: React.FC<ContainerProps> = ({
             </tr>
           </tbody>
         </table>
-        {isImage && <span style={{display:"block",color:"red", marginTop:"10px"}}>You need to upload photo!</span>}
+        {isImage && (
+          <span style={{ display: "block", color: "red", marginTop: "10px" }}>
+            You need to upload photo!
+          </span>
+        )}
       </div>
       <div className="container-btn">
         <button className="btn-a" onClick={handleClick}>
           Cập nhật
         </button>
-        <button className="btn-a" onClick={ handleClickDelete}>
+        <button className="btn-a" onClick={handleClickDelete}>
           Xoá
         </button>
         <button
