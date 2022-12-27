@@ -32,7 +32,7 @@ const EditStudent: React.FC<ContainerProps> = ({
   const [progre, setProgre] = useState(false);
   const [student, setStudent] = useState<any>({});
   const [isImage, setIsImage] = useState(false);
-  let proxy = "http://172.31.109.52:8000/".replace("",'')
+  let proxy = "http://172.31.109.52:8000/".replace("",'');
   useEffect(() => {
     const getDataById = async (id: string) => {
       await axios
@@ -190,8 +190,8 @@ const EditStudent: React.FC<ContainerProps> = ({
                   multiple={false}
                   onChange={(e) => handleInputAvatar(e)}
                   />
-              </td>
-                }
+                </td>
+              )}
             </tr>
             <tr>
               <td>Score</td>
@@ -223,7 +223,7 @@ const EditStudent: React.FC<ContainerProps> = ({
           Quay lại
         </button>
       </div>
-      </div>
+    </div>
   );
 };
 
